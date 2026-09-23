@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隧道窑烧成曲线与燃气单耗核算</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>隧道窑烧成曲线与燃气单耗核算</h1>
+  <div id="datarule" class="note"></div>
+  <div id="tcreport" class="note warn"></div>
+</header>
+
+<section id="kpis" class="kpi-row"></section>
+
+<section class="panel">
+  <div class="panel-head">
+    <h2>三带温度曲线（72h）</h2>
+    <div class="controls">
+      <label>窑体 <select id="kilnSel"></select></label>
+      <label><input type="checkbox" id="showGas"> 叠加燃气曲线</label>
+      <span id="chartHint" class="hint"></span>
+    </div>
+  </div>
+  <canvas id="chart" width="1200" height="380"></canvas>
+  <div id="legend" class="legend"></div>
+</section>
+
+<div class="two-col">
+  <section class="panel">
+    <div class="panel-head"><h2>异常与规矩核验</h2></div>
+    <div id="anomalies"></div>
+  </section>
+  <section class="panel">
+    <div class="panel-head"><h2>两套运行口径对比</h2></div>
+    <div id="scenarios"></div>
+  </section>
+</div>
+
+<section class="panel">
+  <div class="panel-head">
+    <h2>窑车台账（120 台）</h2>
+    <div class="controls"><span class="hint">点行选中窑车；装车密度可换挡，燃气与单耗随之重算</span></div>
+  </div>
+  <div class="table-wrap"><table id="carTable"></table></div>
+</section>
+
+<section class="panel" id="detailPanel" style="display:none">
+  <div class="panel-head"><h2 id="detailTitle">窑车明细</h2></div>
+  <div id="detailBody"></div>
+</section>
+
+<footer class="note">
+  纯前端单页，无外部依赖；数据来自 data/kiln.js（由 data/kiln.json 生成，内容一致）。
+  燃气总量按各带燃烧器流量逐刻累加（0.25h/刻）；单耗 = 燃气总量 ÷ 合格品吨位。
+</footer>
+<script src="data/kiln.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
